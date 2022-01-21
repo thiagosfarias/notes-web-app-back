@@ -16,7 +16,8 @@ public class Note {
     private UUID uuid;
     private String text;
     private String title;
-    private LocalDateTime dateTime;
-    private Boolean isDeleted;
+    private LocalDateTime created;
+    private LocalDateTime updated;
+    private UUID user;
 
 }

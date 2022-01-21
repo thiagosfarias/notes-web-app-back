@@ -14,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 public class NotesController {
-    private NotesService service;
+    private final NotesService service;
 
     @GetMapping("/notes")
     public ResponseEntity<List<Note>> findAll(@RequestParam(value = "uuid")UUID uuid){
