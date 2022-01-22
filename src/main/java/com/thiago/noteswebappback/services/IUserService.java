@@ -2,15 +2,17 @@ package com.thiago.noteswebappback.services;
 
 import com.thiago.noteswebappback.exceptions.ApiException;
 import com.thiago.noteswebappback.exceptions.UserException;
-import com.thiago.noteswebappback.mappers.UserMapper;
+import com.thiago.noteswebappback.mapper.UserMapper;
 import com.thiago.noteswebappback.models.User;
 import com.thiago.noteswebappback.models.enums.Errors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.UUID;
 
+@Service
 @RequiredArgsConstructor
 public class IUserService implements UserService{
     private final UserMapper mapper;

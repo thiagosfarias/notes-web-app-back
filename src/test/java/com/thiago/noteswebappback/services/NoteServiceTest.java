@@ -1,7 +1,7 @@
 package com.thiago.noteswebappback.services;
 
 
-import com.thiago.noteswebappback.mappers.NoteMapper;
+import com.thiago.noteswebappback.mapper.NoteMapper;
 import com.thiago.noteswebappback.models.Note;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,8 @@ public class NoteServiceTest {
     @Test
     public void mustSaveANewNoteWithSucess(){
         Note note = Note.builder().uuid(UUID.randomUUID())
-                        .dateTime(LocalDateTime.now())
+                        .created(LocalDateTime.now())
+                        .updated(LocalDateTime.now())
                         .text("Whatever you want to write here")
                         .title("New Note Test")
                         .build();

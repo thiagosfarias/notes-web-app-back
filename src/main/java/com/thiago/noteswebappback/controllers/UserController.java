@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
+@RequestMapping(value = "/users")
 @RequiredArgsConstructor
 public class UserController {
-    private UserService service;
+    private final UserService service;
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws NoSuchAlgorithmException {

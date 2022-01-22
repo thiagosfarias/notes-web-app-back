@@ -1,9 +1,8 @@
-package com.thiago.noteswebappback.mappers;
+package com.thiago.noteswebappback.mapper;
 
 import com.thiago.noteswebappback.models.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
