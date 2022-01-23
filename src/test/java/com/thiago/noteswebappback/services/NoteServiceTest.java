@@ -47,14 +47,14 @@ public class NoteServiceTest {
                         .title("New Note Test")
                         .build();
 
-        service.newNote(note);
+        service.create(note);
 
         verify(mapper, times(1)).insert(any());
     }
 
     @Test
     public void mustDeleteANoteWithSucess(){
-        service.deleteNote(UUID.randomUUID());
+        service.delete(UUID.randomUUID());
 
         verify(mapper, times(1)).delete(any());
     }

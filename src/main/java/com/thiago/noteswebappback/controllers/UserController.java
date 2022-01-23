@@ -1,14 +1,18 @@
 package com.thiago.noteswebappback.controllers;
 
+import com.thiago.noteswebappback.exceptions.ApiException;
 import com.thiago.noteswebappback.exceptions.UserException;
 import com.thiago.noteswebappback.models.User;
 import com.thiago.noteswebappback.services.UserService;
 import lombok.RequiredArgsConstructor;
 import static org.springframework.http.HttpStatus.CREATED;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -19,10 +23,13 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws NoSuchAlgorithmException {
         try {
-            service.register(user);
-            return ResponseEntity.status(CREATED).build();
-        } catch (UserException userException){
-            throw new UserException("");
+            User newUser = service.register(user);
+
+            return Objects.isNull(newUser) ?
+                    ResponseEntity.status(HttpStatus.CONFLICT).build() :
+                    ResponseEntity.status(CREATED).body(newUser);
+        } catch (ApiException apiException){
+            throw new UserException(apiException.getMessage());
         }
     }
 
@@ -30,4 +37,5 @@ public class UserController {
     public ResponseEntity<User> login(@RequestBody User user){
         return ResponseEntity.ok().body(service.login(user));
     }
+
 }

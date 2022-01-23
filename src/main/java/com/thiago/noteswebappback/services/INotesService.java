@@ -19,12 +19,17 @@ public class INotesService implements NotesService{
     }
 
     @Override
-    public void newNote(Note note) {
+    public void create(Note note) {
         mapper.insert(note);
     }
 
     @Override
-    public void deleteNote(UUID uuid) {
+    public void update(Note note) {
+        mapper.update(note);
+    }
+
+    @Override
+    public void delete(UUID uuid) {
         mapper.delete(uuid);
     }
 }

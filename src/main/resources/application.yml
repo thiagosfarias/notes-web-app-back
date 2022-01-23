@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+app:
+  datasource:
+    postgresql:
+      jdbcUrl: jdbc:postgresql://localhost:5432/notes
+      username: user123
+      password: pass123
+      driverClassName: org.postgresql.Driver
+mybatis:
+  type-handlers-package: com.thiago.noteswebappback.mapper.typeHandler
+

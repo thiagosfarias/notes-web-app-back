@@ -6,6 +6,8 @@ import com.thiago.noteswebappback.mapper.UserMapper;
 import com.thiago.noteswebappback.models.User;
 import com.thiago.noteswebappback.models.enums.Errors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -20,20 +22,24 @@ public class IUserService implements UserService{
 
     @Override
     public User register(User user) throws NoSuchAlgorithmException {
-        User newUser = User.builder()
-                .uuid(UUID.randomUUID())
-                .email(user.getEmail())
-                .name(user.getName())
-                .password(service.encode(user.getPassword()))
-                .build();
-
         try{
-            mapper.register(newUser);
+            if(!Boolean.TRUE.equals(verifyEmail(user.getEmail()))){
+                return null;
+            }
+
+            User newUser = User.builder()
+                    .uuid(UUID.randomUUID())
+                    .email(user.getEmail())
+                    .name(user.getName())
+                    .password(service.encode(user.getPassword()))
+                    .build();
+
+            mapper.insert(newUser);
+
+            return newUser;
         } catch (ApiException apiException){
             throw new UserException(Errors.DATABASE_ERROR.getTitle());
         }
-
-        return newUser;
     }
 
     public Boolean verifyEmail(String email){
@@ -42,12 +48,7 @@ public class IUserService implements UserService{
 
     @Override
     public User login(User user) {
-        return null;
-    }
-
-    @Override
-    public User findUser(UUID uuid) {
-        return mapper.findUser(uuid);
+        return mapper.login(user);
     }
 
 
